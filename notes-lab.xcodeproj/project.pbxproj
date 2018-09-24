@@ -12,6 +12,10 @@
 		FA00B5BB21579A7200026D9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA00B5B921579A7200026D9C /* Main.storyboard */; };
 		FA00B5BD21579A7300026D9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA00B5BC21579A7300026D9C /* Assets.xcassets */; };
 		FA00B5C021579A7300026D9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA00B5BE21579A7300026D9C /* LaunchScreen.storyboard */; };
+		FA00B5CE2157F2A400026D9C /* NotesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00B5CD2157F2A400026D9C /* NotesListTableViewController.swift */; };
+		FA00B5D021581C4C00026D9C /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00B5CF21581C4C00026D9C /* Note.swift */; };
+		FA00B5D22158201500026D9C /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00B5D12158201500026D9C /* NoteDetailViewController.swift */; };
+		FA00B5D42158402600026D9C /* UITextViewHashtagExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00B5D32158402600026D9C /* UITextViewHashtagExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		FA00B5BC21579A7300026D9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA00B5BF21579A7300026D9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA00B5C121579A7300026D9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA00B5CD2157F2A400026D9C /* NotesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotesListTableViewController.swift; path = "notes-lab/NotesListTableViewController.swift"; sourceTree = "<group>"; };
+		FA00B5CF21581C4C00026D9C /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		FA00B5D12158201500026D9C /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NoteDetailViewController.swift; path = "notes-lab/NoteDetailViewController.swift"; sourceTree = "<group>"; };
+		FA00B5D32158402600026D9C /* UITextViewHashtagExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UITextViewHashtagExtension.swift; path = "notes-lab/UITextViewHashtagExtension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +46,9 @@
 		FA00B5A921579A7200026D9C = {
 			isa = PBXGroup;
 			children = (
+				FA00B5CD2157F2A400026D9C /* NotesListTableViewController.swift */,
+				FA00B5D12158201500026D9C /* NoteDetailViewController.swift */,
+				FA00B5D32158402600026D9C /* UITextViewHashtagExtension.swift */,
 				FA00B5B421579A7200026D9C /* notes-lab */,
 				FA00B5B321579A7200026D9C /* Products */,
 			);
@@ -57,6 +68,7 @@
 				FA00B5B521579A7200026D9C /* AppDelegate.swift */,
 				FA00B5B721579A7200026D9C /* ViewController.swift */,
 				FA00B5B921579A7200026D9C /* Main.storyboard */,
+				FA00B5CF21581C4C00026D9C /* Note.swift */,
 				FA00B5BC21579A7300026D9C /* Assets.xcassets */,
 				FA00B5BE21579A7300026D9C /* LaunchScreen.storyboard */,
 				FA00B5C121579A7300026D9C /* Info.plist */,
@@ -135,8 +147,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA00B5D22158201500026D9C /* NoteDetailViewController.swift in Sources */,
 				FA00B5B821579A7200026D9C /* ViewController.swift in Sources */,
+				FA00B5D42158402600026D9C /* UITextViewHashtagExtension.swift in Sources */,
+				FA00B5CE2157F2A400026D9C /* NotesListTableViewController.swift in Sources */,
 				FA00B5B621579A7200026D9C /* AppDelegate.swift in Sources */,
+				FA00B5D021581C4C00026D9C /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
