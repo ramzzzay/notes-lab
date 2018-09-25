@@ -8,9 +8,38 @@
 
 import UIKit
 
-class NotesListTableViewController: UITableViewController {
+class NotesListTableViewController: UITableViewController, UISearchResultsUpdating {
+    
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+    
+    // MARK: - Private instance methods
+    
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filteredNotes = notes.filter({( note : Note) -> Bool in
+            return note.title.lowercased().contains(searchText.lowercased())
+        })
+        
+        tableView.reloadData()
+    }
+    
     
     var notes: [Note] = []
+    
+    var filteredNotes : [Note] = []
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -20,6 +49,13 @@ class NotesListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Setup the Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search notes"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -37,6 +73,9 @@ class NotesListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if isFiltering() {
+            return filteredNotes.count
+        }
         return notes.count
     }
 
@@ -46,7 +85,16 @@ class NotesListTableViewController: UITableViewController {
 
          //Configure the cell...
         
-        cell.textLabel!.text = notes[indexPath.row].title
+        let note: Note
+        if isFiltering() {
+            note = filteredNotes[indexPath.row]
+        } else {
+            note = notes[indexPath.row]
+        }
+        cell.textLabel!.text = note.title
+//        cell.detailTextLabel!.attributedText = note.content
+        
+//        cell.textLabel!.text = notes[indexPath.row].title
 
         return cell
     }
