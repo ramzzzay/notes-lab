@@ -18,8 +18,37 @@ class NoteDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share", style: .plain, target: self, action: #selector(shareBtn(sender:)))
+
 
         // Do any additional setup after loading the view.
+    }
+    
+    
+    @IBAction func shareBtn(sender: UIButton) {
+        // Hide the keyboard
+        contentTextField.resignFirstResponder()
+        // Check and see if the text field is empty
+        if (contentTextField.text == "") {
+            // The text field is empty so display an Alert
+            displayAlert(title: "Warning", message: "Enter something in the text field!")
+        } else {
+            // We have contents so display the share sheet
+            displayShareSheet(shareContent: contentTextField.text!)
+        }
+    }
+    
+    func displayAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+        return
+    }
+    
+    func displayShareSheet(shareContent:String) {
+        let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: {})
     }
     
     override func viewWillAppear(_ animated: Bool) {
