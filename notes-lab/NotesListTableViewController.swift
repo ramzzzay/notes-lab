@@ -92,7 +92,7 @@ class NotesListTableViewController: UITableViewController, UISearchResultsUpdati
             note = notes[indexPath.row]
         }
         cell.textLabel!.text = note.title
-//        cell.detailTextLabel!.attributedText = note.content
+        cell.detailTextLabel!.attributedText = note.content
         
 //        cell.textLabel!.text = notes[indexPath.row].title
 
