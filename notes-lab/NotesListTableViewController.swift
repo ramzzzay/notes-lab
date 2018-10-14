@@ -12,11 +12,21 @@ class NotesListTableViewController: UITableViewController, UISearchResultsUpdati
     
     
     func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
+//        filterContentForSearchText(searchController.searchBar.text!)
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
     
     func isFiltering() -> Bool {
-        return searchController.isActive && !searchBarIsEmpty()
+        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
+        return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
+        
+//        return searchController.isActive && !searchBarIsEmpty()
     }
     
     // MARK: - Private instance methods
@@ -26,8 +36,15 @@ class NotesListTableViewController: UITableViewController, UISearchResultsUpdati
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+    func filterContentForSearchText(_ searchText: String, scope: String = "Title") {
         filteredNotes = notes.filter({( note : Note) -> Bool in
+            if(scope == "Title"){
+                return note.title.lowercased().contains(searchText.lowercased())
+            }
+            if(scope == "Content"){
+                return note.content.string.lowercased().contains(searchText.lowercased())
+            }
+            
             return note.title.lowercased().contains(searchText.lowercased())
         })
         
@@ -56,6 +73,8 @@ class NotesListTableViewController: UITableViewController, UISearchResultsUpdati
         searchController.searchBar.placeholder = "Search notes"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        searchController.searchBar.scopeButtonTitles = ["Title", "Content"]
+//        searchController.searchBar.delegate = self
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -119,7 +138,7 @@ class NotesListTableViewController: UITableViewController, UISearchResultsUpdati
 //        }
 
         notes.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+        tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
     }
  
 
@@ -144,10 +163,11 @@ class NotesListTableViewController: UITableViewController, UISearchResultsUpdati
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //         Get the new view controller using segue.destination.
-//         Pass the selected object to the new view controller.
+//         Pass the selected object tfilterContentForSearchTexto the new view controller.
 //        let noteDetailViewController = segue.destination as! NoteDetailViewController
 //        var selectedIndexPath = tableView.indexPathForSelectedRow
 //        noteDetailViewController.note = notes[selectedIndexPath!.row]
+        
         
         
         if segue.identifier == "showNote" {
